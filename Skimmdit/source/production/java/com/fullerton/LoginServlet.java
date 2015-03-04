@@ -52,13 +52,6 @@ public class LoginServlet extends HttpServlet
         }
     }
 
-    private void showUserForm(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/WEB-INF/jsp/view/userForm.jsp")
-        .forward(request, response);
-		
-	}
-
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
@@ -79,16 +72,29 @@ public class LoginServlet extends HttpServlet
         
     }
     
+	private void showUserForm(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+    	request.getRequestDispatcher("/WEB-INF/jsp/view/userForm.jsp")
+        .forward(request, response);
+		
+	}
+	
     private void createUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 		String name = request.getParameter("name");
 		String password = request.getParameter("pswd");
-		System.out.println(name);
 		if(name!= null && password != null){
-			userDatabase.put(name, password);
-			System.out.println(userDatabase.get(name));
-			request.setAttribute("action", null);
-			response.sendRedirect("login");
+			System.out.println("Test 1:" + userDatabase.get(name));
+			if(userDatabase.get(name)==null){
+				System.out.println(userDatabase.get(name));
+				userDatabase.put(name, password);
+				request.setAttribute("action", null);
+				response.sendRedirect("login");
+			}else{
+				request.setAttribute("createFailed", "not null");
+	            request.getRequestDispatcher("/WEB-INF/jsp/view/userForm.jsp")
+	                   .forward(request, response);
+			}
 		}else{
 			request.getSession().invalidate();
             response.sendRedirect("login");

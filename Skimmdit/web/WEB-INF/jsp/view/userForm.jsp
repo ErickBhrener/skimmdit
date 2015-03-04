@@ -6,7 +6,20 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     </head>
     <body>
+    <div id="header">
+			<h2>Skimmdit</h2>
+	</div>
 	<div>
+		<%
+			if (request.getAttribute("createFailed") != null) {
+		%>
+		<div class="alert alert-danger">
+			<b>The username already exists. Please try again.</b>
+		</div>
+		<%	
+			request.setAttribute("createFailed", null);
+			}
+		%>
 		<h2>Create a New User</h2>
 		<div class="row">
 			<div class="col-md-6" style="width: 30%">
