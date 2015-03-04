@@ -20,13 +20,6 @@ public class LoginServlet extends HttpServlet
 {
     private static final Map<String, String> userDatabase = new Hashtable<>();
 
-    static {
-        userDatabase.put("Nicholas", "password");
-        userDatabase.put("Sarah", "drowssap");
-        userDatabase.put("Mike", "wordpass");
-        userDatabase.put("John", "green");
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException

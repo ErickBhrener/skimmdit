@@ -13,6 +13,8 @@
 <html>
     <head>
         <title>Skimmdit</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <style type="text/css">
         	#header {
 				border-bottom: 1px solid #5f99cf;position: relative;background-color: #cee3f8;z-index: 99;
@@ -51,8 +53,12 @@
 			<h2>Skimmdit</h2>
 		</div>
 		
-		<a style = "font-family: "Times New Roman", Times, serif; font-size: large;"
+		<a style = "font-family: 'Times New Roman', Times, serif; font-size: large;"
 		href="<c:url value="/main"><c:param name="action" value="create" /></c:url>">Create Post</a>
+		<br />
+		<% if(request.getSession().getAttribute("username")!=null){ %>
+				<a href="<c:url value="/login?logout" />">Logout</a>
+			<% } %>
 		<br />
 		<br />
 		<%
@@ -63,7 +69,7 @@
 				for (int id : postDatabase.keySet()) {
 					String idString = Integer.toString(id);
 					Post post = postDatabase.get(id);
-		%><div>
+		%><div class= "well" style="margin-bottom:2px; padding:2px">
 			<span class="index"><%=idString%></span>
 			<div class="div_votes">
 				<div class="arrow_up">
