@@ -58,8 +58,10 @@
 		<br />
 		<% if(request.getSession().getAttribute("username")!=null){ %>
 				<a href="<c:url value="/login?logout" />">Logout</a>
+			<% }
+			else{ %>
+				<a href="<c:url value="/login" />">Login</a>
 			<% } %>
-		<br />
 		<br />
 		<%
 			if (postDatabase.size() == 0) {
